@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8840396412658087983
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4320096169723741987}
+  - component: {fileID: 6227258487226003067}
+  m_Layer: 0
+  m_Name: RoadManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4320096169723741987
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8840396412658087983}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.0605125, y: 1.8349108, z: -2.468271}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6227258487226003067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8840396412658087983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26516b940d49e1b4196c0b495a191bfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelChunkData:
+  - {fileID: 11400000, guid: 5b748b512d6352745b9e9da5dac25672, type: 2}
+  - {fileID: 11400000, guid: d8b739a2b814b964cb72786f60eba935, type: 2}
+  - {fileID: 11400000, guid: 23002c2e41260c74186921a8ecf97135, type: 2}
+  - {fileID: 11400000, guid: d0c6a6e03d7ea204f9ae66974fb6b6f3, type: 2}
+  - {fileID: 11400000, guid: e2e0647b573d5d044aad5c98b8133e19, type: 2}
+  - {fileID: 11400000, guid: cb8c6c6da6f77674d8864c9b55bb8541, type: 2}
+  - {fileID: 11400000, guid: 29ab0ab2a77a6314e993051f1e413898, type: 2}
+  - {fileID: 11400000, guid: 56f291f0783698a46819bfdd0a9b56fd, type: 2}
+  - {fileID: 11400000, guid: 1dc69a60c28fd2044994596124a65afa, type: 2}
+  firstChunk: {fileID: 11400000, guid: 5b748b512d6352745b9e9da5dac25672, type: 2}
+  spawnOrigin: {x: 0, y: 0, z: 0}
+  chunksToSpawn: 200

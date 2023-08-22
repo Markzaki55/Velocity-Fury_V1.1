@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e5a355be44e8144d824e1ce391b5bca, type: 3}
+  m_Name: RoadChunkCurveSW
+  m_EditorClassIdentifier: 
+  chunkSize: {x: 20, y: 20}
+  levelChunks:
+  - {fileID: 2791733209810830690, guid: dd62e51c76bb00a4cb9d1bfab38d2daa, type: 3}
+  entryDirection: 2
+  exitDirection: 3

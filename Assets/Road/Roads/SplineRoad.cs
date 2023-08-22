@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEditor;
@@ -27,7 +26,8 @@ public class SplineRoad : MonoBehaviour
 
     [SerializeField] float _width;
     [SerializeField] int _resolution;
-    [SerializeField] int _proceduralIterations;
+    [SerializeField] int _proceduralChunks;
+    [SerializeField] int _smoothSteps;
 
     List<float3> _vertices = new List<float3>();
 
@@ -43,21 +43,7 @@ public class SplineRoad : MonoBehaviour
         
     }
 
-    private void OnDrawGizmos()
-    {
-        if (_vertices?.Count <= 0)
-            return;
-        Handles.matrix = transform.localToWorldMatrix;
-        int count = 0;
-        //for (int i = 0; i < _vertices.Count; i += 2)
-        //{
-        //    Handles.SphereHandleCap(count, _vertices[i], quaternion.identity, 1f, EventType.Repaint);
-        //    Handles.SphereHandleCap(count, _vertices[i + 1], quaternion.identity, 1f, EventType.Repaint);
-
-        //}
-
-    }
-
+    // Calculate ROAD vertices
     private void CalculateVertices(int increment)
     {
         _vertices = new List<float3>();
@@ -66,32 +52,40 @@ public class SplineRoad : MonoBehaviour
         float stepAccumulator = 0;
         for (int i = 0; i <= increment; i++)
         {
-            CalculatePoints(out float3 p1, out float3 p2, stepAccumulator);
+            float3[] roadVertsPerKnot = new float3[4];
+            CalculatePoints(ref roadVertsPerKnot, stepAccumulator);
             stepAccumulator += step;
-            _vertices.Add(p1);
-            _vertices.Add(p2);
+            _vertices.AddRange(roadVertsPerKnot);
         }
     }
-    private void CalculatePoints(out float3 p1, out float3 p2, float stepAccumulator)
+    private void CalculatePoints(ref float3[] points, float stepAccumulator)
     {
         _splineContainer.Evaluate(_splineIndex, _time + stepAccumulator, out _position, out _tangent, out _upVector);
         float3 right = Vector3.Cross(_tangent, _upVector).normalized;
-        p1 = _position + (right * _width);
-        p2 = _position + (-right * _width);
+        for (int i = points.Length - 1; i >= 0; i--)
+        {
+            if (i < points.Length/ 2)
+            {
+                points[i] = _position + (-right * _width) * (i % (points.Length / 2) + 1);
+            }
+            else
+            {
+                points[i] = _position + (right * _width) * (i % (points.Length / 2) + 1);
+            }
+        }
     }
 
     public void GenerateRoad()
     {
         _splineContainer.Spline = new Spline();
-
-        for (int i = 0; i <= _proceduralIterations; i++)
+        for (int i = 0; i <= _proceduralChunks; i++)
         {
             _splineContainer.Spline.Add(new BezierKnot(new float3(currentX, 0.0f, currentZ)));
             CalculateVertices(i);
-            currentX += Random.Range(100.0f, 3000.0f);
-            currentZ += Random.Range(10.0f, 30.0f);
+            currentX += Random.Range(10.0f, 500.0f);
+            currentZ += Random.Range(1.0f, 100.0f);
         }
-        MeshData meshData = MeshGenerator.GenerateTerrainMesh(_vertices);
+        MeshData meshData = MeshGenerator.GenerateTerrainMeshPlane(_vertices);
         _meshFilter.sharedMesh = meshData.CreateMesh();
         currentX = 0;
         currentZ = 0;

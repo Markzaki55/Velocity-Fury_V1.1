@@ -6,7 +6,7 @@ using System.Linq;
 
 public static class MeshGenerator
 {
-    public static MeshData GenerateTerrainMesh(List<float3> vertices)
+    public static MeshData GenerateTerrainMeshPlane(List<float3> vertices)
     {
         int width = vertices.Count;
         MeshData meshData = new MeshData(width);

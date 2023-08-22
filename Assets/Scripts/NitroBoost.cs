@@ -43,7 +43,6 @@ public class NitroBoost : MonoBehaviour
         BoostKey = Input.GetKey(KeyCode.LeftShift);
         UseNitro();
         nitroEffects();
-        Debug.Log(nitroValue);
 
 
 
